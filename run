@@ -1,7 +1,12 @@
 #!/bin/bash
 
-LTAG= git describe --tags --abbrev=0
+VERS= git describe
+
+LTAG= git describe --tags --abbrev=0 
 
 git log $LTAG ..HEAD --format=medium >> ver 
+
+# echo ${VERS}
+# cat ver
 
 
