@@ -17,7 +17,9 @@ echo ${LTAG} >> ${LOG}
 
 git log `git describe --tags --abbrev=0`..HEAD --format=medium >> ${LOG}
 
+./genver ${VERS}
+
 # echo ${VERS}
-cat ${LOG}
+# cat ${LOG}
 
 
