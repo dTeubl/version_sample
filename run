@@ -1,12 +1,25 @@
 #!/bin/bash
 
-VERS= git describe
+# Set the local variables
+LOG="ver"
 
-LTAG= git describe --tags --abbrev=0 
+VERS=`git describe`
 
-git log $LTAG ..HEAD --format=medium >> ver 
+LTAG=`git describe --tags --abbrev=0`
+
+# Clear and fill the result file
+rm ${LOG}
+
+echo "LogFile" >> ${LOG}
+echo >> ${LOG}
+echo ${VERS} >> ${LOG}
+echo ${LTAG} >> ${LOG}
+
+git log `git describe --tags --abbrev=8` --format=medium 
+git log ${LTAG} --format=medium >> ${LOG} 
+# git log ${LTAG} ..HEAD --format=medium >> ${LOG}
 
 # echo ${VERS}
-# cat ver
+cat ${LOG}
 
 
