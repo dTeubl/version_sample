@@ -1,0 +1,7 @@
+#!/bin/bash
+
+LTAG= git describe --tags --abbrev=0
+
+git log $LTAG ..HEAD --format=medium >> ver 
+
+
