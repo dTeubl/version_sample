@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[] ) {
 
-    unsigned int MAGIC = 2;
+    unsigned int MAGIC = 3;
 
     try{ 
 
@@ -43,6 +43,10 @@ int main(int argc, char *argv[] ) {
     std::cout << std::endl;
 
     MAGIC = static_cast<unsigned int>(std::stoi(match.str(2)));
+
+
+
+
     // Now the MAGIC part, We should rewrite the value of the MAGIC variable!!
     
    
