@@ -25,13 +25,9 @@ int main(int argc, char *argv[] ) {
     std::cout << gitVer << std::endl;
 
     std::string reg_value{};
-//    reg_value+="(v(.)*(-)[0-9]*(.))"; // not working
-//     reg_value+="((.)*(-)[0-9]*)";
-//     reg_value+="((.)*)";
-    reg_value+="(.)*-([0-9]+)-(.)*";
+    reg_value+="(.)*-([0-9]+)-(.)*"; // <---- This is the one!
 
     std::regex base_reg{reg_value};
-//     std::regex base_reg{std::string{argv[2]},std::regex_constants::extended};
     std::smatch match;
 
     std::cout << "result:\t" << std::regex_match(gitVer,match,base_reg) << std::endl;
@@ -41,6 +37,9 @@ int main(int argc, char *argv[] ) {
         std::cout << "match " << i << ": "<< match.str(i) << ";\n";
     
     std::cout << std::endl;
+
+
+
 
 
     }
