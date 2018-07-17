@@ -10,17 +10,7 @@
 
 int main(int argc, char *argv[] ) {
 
-    unsigned int MAGIC = 0;
-////
-/////
-/////
-
-
-
-
-///
-///
-//
+    unsigned int MAGIC = 2;
 
     try{ 
 
@@ -66,8 +56,17 @@ int main(int argc, char *argv[] ) {
     
     std::cout << "reading file: " << "getver.cpp" << std::endl;
     std::string vers{};
+    int mypos = file.tellp( );
+    int lastpos = 0;
+    int lnum = 0;
+    std::cout << "my position: " << mypos << std::endl;
 
     while( std::getline(file,line)) {
+            
+        lastpos = mypos;
+        mypos = file.tellp();
+        std::cout << "line number: " << lnum++ <<"\tmy position: " << mypos << std::endl;
+
         if( std::regex_match(line,res,base) ) {
 
         std::cout << res.size() << std::endl;
@@ -88,7 +87,8 @@ int main(int argc, char *argv[] ) {
 
         if( res.str(3) == "MAGIC" ) {
             std::cout << "We have it now!" << std::endl;
-//             file << "hahahahahah";  //<<--- this also works
+            file.seekp(lastpos);
+            file << nl << "\n";  //<<--- this also works
             break;
         }
 
