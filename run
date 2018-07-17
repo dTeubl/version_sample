@@ -7,6 +7,9 @@ VERS=`git describe`
 
 LTAG=`git describe --tags --abbrev=0`
 
+# Just to be sure it is compiled
+make -B
+
 # Clear and fill the result file
 rm ${LOG}
 
@@ -17,7 +20,7 @@ echo ${LTAG} >> ${LOG}
 
 git log `git describe --tags --abbrev=0`..HEAD --format=medium >> ${LOG}
 
-./genver ${VERS}
+./genver ${VERS} $1
 
 # echo ${VERS}
 # cat ${LOG}
