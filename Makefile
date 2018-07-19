@@ -18,6 +18,7 @@ $(PROG):$(OBJS)
 
 # Rules to clean up the project
 
+.PHONY: clean
 clean:
 	rm -f *.o *.log	
 
