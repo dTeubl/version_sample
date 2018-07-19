@@ -7,10 +7,11 @@
 #include <fstream>
 #include <regex>
 #include <string>
+#include "fwid.h"
 
 int main(int argc, char *argv[] ) {
 
-    unsigned int MAGIC = 3;
+    unsigned int MAGIC = 4;
 
     try{ 
 
@@ -23,6 +24,8 @@ int main(int argc, char *argv[] ) {
         std::cout << i << ": " << argv[i] << "\t";
 
     std::cout << std::endl;;
+
+/*
 
 //     std::string gitVer=argv[1];
     std::string gitVer{argv[1]};
@@ -43,7 +46,7 @@ int main(int argc, char *argv[] ) {
     std::cout << std::endl;
 
     MAGIC = static_cast<unsigned int>(std::stoi(match.str(2)));
-
+*/
 
 
 
@@ -60,19 +63,25 @@ int main(int argc, char *argv[] ) {
     
     std::cout << "reading file: " << "getver.cpp" << std::endl;
     std::string vers{};
+
+/*
     int mypos = file.tellp( );
     int lastpos = 0;
     int lnum = 0;
     std::cout << "my position: " << mypos << std::endl;
+*/
 
     while( std::getline(file,line)) {
             
+/*
         lastpos = mypos;
         mypos = file.tellp();
         std::cout << "line number: " << lnum++ <<"\tmy position: " << mypos << std::endl;
+*/
 
         if( std::regex_match(line,res,base) ) {
 
+/*
         std::cout << res.size() << std::endl;
         for( size_t i=1; i<res.size(); i++)
             std::cout << "res " << i << ": "<< res.str(i) << ";\n";
@@ -88,11 +97,11 @@ int main(int argc, char *argv[] ) {
         nl+=res.str(6);
 
         std::cout << "new line is: " << nl << std::endl;
-
+*/
         if( res.str(3) == "MAGIC" ) {
             std::cout << "We have it now!" << std::endl;
-            file.seekp(lastpos);
-            file << nl << "\n";  //<<--- this also works
+//             file.seekp(lastpos);
+//             file << nl << "\n";  //<<--- this also works
             break;
         }
 
@@ -100,6 +109,35 @@ int main(int argc, char *argv[] ) {
     } // while( )
 
     file.close();
+
+//=========================== FWID modification ===============================
+// Setting up for the right part to be able to modify the describing structure 
+// in the fwid.cpp file.
+
+    std::cout << "\n================================\n" << std::endl;
+
+    std::string gitVer{argv[1]};
+    std::cout << gitVer << std::endl;
+
+    std::string reg_tag{};
+//     reg_value+="([ ]*[a-zA-Z]*)(tag_)(.)*"; // <---- This is the one!
+    reg_tag+="([ ]*[a-zA-Z]*)(.)(tag_ = \")(v[0-9]*)(.)([0-9]*)(\")(.)*"; // <---- This is the one!
+
+    std::regex base_reg{reg_tag};
+    std::smatch match;
+
+    std::fstream file2 {"fwid.cpp",std::ios::in | std::ios::out };
+
+    while( std::getline(file2,line)) {
+
+        std::cout << line << std::endl;
+
+        if( std::regex_match(line,res,base_reg) ) {
+
+            std::cout << "found it!" << std::endl;
+        }
+    }
+
 
     }
     catch(const char* e)  {

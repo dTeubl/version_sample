@@ -25,3 +25,12 @@ clean:
 %.o: %.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# rules for the fwid sample program
+
+fwid.o: fwid.h
+
+.PHONY: fwid
+fwid: fwid.o
+	${CC} ${CFLAGS} $^ -o $@
+
+
