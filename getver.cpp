@@ -120,10 +120,16 @@ int main(int argc, char *argv[] ) {
     std::cout << gitVer << std::endl;
 
     std::string reg_tag{};
-//     reg_value+="([ ]*[a-zA-Z]*)(tag_)(.)*"; // <---- This is the one!
     reg_tag+="([ ]*[a-zA-Z]*)(.)(tag_ = \")(v[0-9]*)(.)([0-9]*)(\")(.)*"; // <---- This is the one!
+    std::string reg_branch{};
+    reg_branch+= "([ ]*[a-zA-Z]*)(.)(branch_ = \")([a-zA-Z0-9]*)(\")(.)*"; // <---- This is the one!
 
-    std::regex base_reg{reg_tag};
+    std::string reg_buildNum{};
+    reg_buildNum+= "([ ]*[a-zA-Z]*)(.)(buildNum_ = )([0-9]*)(.)*"; // <---- This is the one!
+
+//     std::regex base_reg{reg_tag};
+//     std::regex base_reg{reg_branch};
+    std::regex base_reg{reg_buildNum};
     std::smatch match;
 
     std::fstream file2 {"fwid.cpp",std::ios::in | std::ios::out };
