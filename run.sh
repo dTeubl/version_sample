@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Set the local variables
-LOG="ver"
-
+LOG="ver.txt"
 VERS=`git describe`
-
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
 LTAG=`git describe --tags --abbrev=0`
 
 # Just to be sure it is compiled
@@ -20,9 +19,9 @@ echo ${LTAG} >> ${LOG}
 
 git log `git describe --tags --abbrev=0`..HEAD --format=medium >> ${LOG}
 
-./genver ${VERS} "(.)*-([0-9]+)-(.)*"
-
+# input as: tag, branch, string with buildnum
+./genver ${LTAG} ${BRANCH} ${VERS} 
+ 
 # echo ${VERS}
-# cat ${LOG}
 
 

@@ -1,4 +1,9 @@
 # Simple gitignore file
 
-ver
+# Do not track binaries
 genver
+fwid
+
+# No not follow generated files
+*.o
+*.txt
