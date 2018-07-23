@@ -25,4 +25,10 @@ We should create a script/program/something, which wraps these function together
 With that, and a well written pre-commit script/program, the version management with correct build numbers could be set up. --> The source files under a given HASH code will give the same build number as "git describe" should give us.
 
 
+Conecpt
+-------
+
+Give the program the following arguments: "tag", "branch", "git describe".
+
+With these parameters, the program should modify the *fwid.cpp* file, which store these value later in binary as well.
 

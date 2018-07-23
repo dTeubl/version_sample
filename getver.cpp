@@ -17,17 +17,39 @@
 #include "fwid.h"
 
 int main(int argc, char *argv[] ) {
+    int buildNum=0;
 
     try{ 
 
     std::cout << argc << std::endl;
 
-    if( argc < 3 )
-        throw("not enough input arguments");
+    if( argc <= 3 )
+        throw("Not enough input arguments");
 
     // Checking the input arguments
     for(int i=0; i<argc; ++i)
         std::cout << i << ": " << argv[i] << "\t";
+
+    // Read out the build number
+
+    std::string gitVer{argv[3]};
+    std::cout << gitVer << std::endl;
+
+    std::string reg_value{};
+    reg_value+="(.)*-([0-9]+)-(.)*"; // <---- This is the one!
+
+    std::regex base_reg{reg_value};
+    std::smatch match;
+
+    std::cout << "result:\t" << std::regex_match(gitVer,match,base_reg) << std::endl;
+
+    std::cout << match.size() << std::endl;
+    for( size_t i=1; i<match.size(); i++)
+        std::cout << "match " << i << ": "<< match.str(i) << ";\n";
+    
+    std::cout << std::endl;
+
+    buildNum = static_cast<unsigned int>(std::stoi(match.str(2)));
 
     
 //=========================== FWID modification ===============================
