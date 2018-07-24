@@ -17,7 +17,7 @@ FWID gFwID;
 void InitFwID( void ) {
     gFwID.tag_ = "v1.3";
     gFwID.branch_ = "tempfile";
-    gFwID.buildNum_ = 9;
+    gFwID.buildNum_ = 11;
 }
 
 int main( ) {

@@ -71,8 +71,8 @@ std::string  UpdateBracnh( std::string l, std::string newBranch ) {
     std::smatch res;
 
     if( std::regex_match(l,res,base_reg) ) {
-        std::cout << "found it!" << std::endl;
-        std::cout << "current line is:\n" << l << std::endl;
+//         std::cout << "found it!" << std::endl;
+//         std::cout << "current line is:\n" << l << std::endl;
         rS = std::string{};
 
         rS+=res.str(1);
@@ -82,7 +82,7 @@ std::string  UpdateBracnh( std::string l, std::string newBranch ) {
         rS+=res.str(5);
         rS+=res.str(6);
 
-        std::cout << "New Line should be:\n" << rS << std::endl;
+//         std::cout << "New Line should be:\n" << rS << std::endl;
 
     }
     return rS;
@@ -103,8 +103,8 @@ std::string UpdateBuilNum( std::string l, std::string buildNum ) {
     std::smatch res;
 
     if( std::regex_match(l,res,base_reg) ) {
-        std::cout << "found it!" << std::endl;
-        std::cout << "current line is:\n" << l << std::endl;
+//         std::cout << "found it!" << std::endl;
+//         std::cout << "current line is:\n" << l << std::endl;
 
         rS=std::string{};
         rS+= res.str(1);
@@ -113,8 +113,7 @@ std::string UpdateBuilNum( std::string l, std::string buildNum ) {
         rS+= buildNum;
         rS+= res.str(5);
 
-        std::cout << "New Line should be:\n" << rS << std::endl;
-
+//         std::cout << "New Line should be:\n" << rS << std::endl;
     }
     return rS;
 }
@@ -200,12 +199,22 @@ int main(int argc, char *argv[] ) {
 //     for( auto l : tempF )
 //         std::cout << l << std::endl;
 
-    std::fstream fo {"fwid.cpp", std::ios::out };
+    std::fstream fo {"fwid_temp.cpp", std::ios::out };
     for( auto l: tempF)
         fo << l << std::endl;
 
     fo.close();
 
+    // invoke system command to replace files
+    auto r = system("mv -v ./fwid_temp.cpp ./fwid.cpp");
+
+    if( r ) {
+        std::string err{};
+        err+="Could not rename the fwid.cpp! Error code: "; 
+        err+= std::to_string(r);
+        err+="\n";
+        throw(err);
+    }
 
     }
     catch(const char* e)  {
