@@ -15,12 +15,13 @@
 FWID gFwID;
 
 void InitFwID( void ) {
-    gFwID.tag_ = "v1.0";
-    gFwID.branch_ = "master";
-    gFwID.buildNum_ = 0;
+    gFwID.tag_ = "v1.3";
+    gFwID.branch_ = "tempfile";
+    gFwID.buildNum_ = 9;
 }
 
 int main( ) {
+    InitFwID( );
 
     std::cout << "Firware properties:\n";
     std::cout << "Tag:\t" << gFwID.tag_ << std::endl;
