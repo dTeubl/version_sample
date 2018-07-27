@@ -39,4 +39,6 @@ fwid: fwid.o
 info:
 	@echo "Informations about this Makefile:"
 
-
+.PHONY: hooks
+hooks:
+	ln -rs ./hooks/pre-commit-test.sh .git/hooks/pre-commit
