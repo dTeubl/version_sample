@@ -17,7 +17,7 @@ FWID gFwID;
 void InitFwID( void ) {
     gFwID.tag_ = "v1.3";
     gFwID.branch_ = "master";
-    gFwID.buildNum_ = 15;
+    gFwID.buildNum_ = 17;
 }
 
 int main( ) {

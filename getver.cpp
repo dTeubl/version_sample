@@ -124,6 +124,7 @@ std::string UpdateBuilNum( std::string l, std::string buildNum ) {
 
 int main(int argc, char *argv[] ) {
     std::string buildNum{};
+    unsigned int bN =0;
 
     try{ 
 
@@ -155,7 +156,11 @@ int main(int argc, char *argv[] ) {
     
     std::cout << std::endl;
 
+    // Incrementing the build number according to the input variable
     buildNum = std::string{match.str(2)};
+    bN = static_cast<unsigned int>(std::stoi(buildNum));
+    bN += 1;
+    buildNum = std::to_string(bN);
 
     
 //=========================== FWID modification ===============================
