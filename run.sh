@@ -21,7 +21,9 @@ git log `git describe --tags --abbrev=0`..HEAD --format=medium >> ${LOG}
 
 # input as: tag, branch, string with buildnum
 ./genver ${LTAG} ${BRANCH} ${VERS} 
- 
-# echo ${VERS}
+
+# rebuld the program itself
+make fwid
+
 
 
